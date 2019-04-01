@@ -2,12 +2,12 @@ package com.lemon.school;
 
 public class Worker {
 
-    private String firstName;
-    private String lastName;
-    private Address address;
-    private int idNumber;
-    private double hoursWorked;
-    private double hourlyRate;
+    public String firstName;
+    public String lastName;
+    public Address address;
+    public int idNumber;
+    public double hoursWorked;
+    public double hourlyRate;
 
 
     public Worker(String firstName, String lastName, Address address, int idNumber, double hoursWorked, double hourlyRate) {
@@ -35,14 +35,14 @@ public class Worker {
         return (this.hourlyRate * this.hoursWorked);
     }
 
+
     @Override
     public String toString() {
-        return "Worker{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", address=" + address +
-                ", hoursWorked=" + hoursWorked +
-                ", hourlyRate=" + hourlyRate +
-                '}';
+        return  firstName
+                + " "
+                + lastName
+                + "\n"
+                + "GetsPaid='"
+                + calculatePay();
     }
 }

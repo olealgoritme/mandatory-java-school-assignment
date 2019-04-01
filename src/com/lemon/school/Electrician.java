@@ -19,13 +19,11 @@ public class Electrician extends Worker {
     }
 
     public double calculatePay() {
-        return (this.hourlyRate * this.hoursWorked) + wiringCosts;
+        return super.calculatePay() + wiringCosts;
     }
 
     @Override
     public String toString() {
-        return " Electrician{" +
-                "wiringCosts=" + wiringCosts +
-                '}';
+        return super.toString() + "\n" + doWork();
     }
 }
