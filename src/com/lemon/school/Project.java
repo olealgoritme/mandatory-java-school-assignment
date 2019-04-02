@@ -104,12 +104,12 @@ public class Project implements Comparable<Project> {
     
     @Override
     public int compareTo(Project p) {
-        return this.startDate(p.startDate);
+        return this.startDate.compareTo(p.startDate);
     }
 
     // Not exactly a useful return type, so adding another public
     // function that makes more sense.
-    public boolean isBefore(LocalDate startDate, LocalDate end) {
-        return startDate.isBefore(endDate);
+    public boolean isBefore(Project p) {
+        return this.startDate.compareTo(p.endDate);
     }
 }

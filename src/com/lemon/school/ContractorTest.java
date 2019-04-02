@@ -18,6 +18,10 @@ public class ContractorTest {
     private static LocalDate startDate;
     private static LocalDate endDate;
 
+    // Projects
+    private static Project houseProject;
+    private static Project motionLightProject;
+
     public static void main(String[] args) {
 
         /* WORKERS START */
@@ -40,7 +44,7 @@ public class ContractorTest {
         address = new Address("Veiveien 1", "Oslo", "Oslo", "0352");
         startDate = LocalDate.parse("2019-05-03");
         endDate = LocalDate.parse("2019-11-03");
-        Project houseProject = new Project("House Project", "Jens Hansen", address, 18, startDate, endDate);
+        houseProject = new Project("House Project", "Jens Hansen", address, 18, startDate, endDate);
 
         // Housing Project - Workers
         electrician.setHoursWorked(65);
@@ -63,7 +67,7 @@ public class ContractorTest {
         address = new Address("Snurresprettgata 141", "Oslo", "Oslo", "0141");
         startDate = LocalDate.parse("2019-11-11");
         endDate = LocalDate.parse("2019-12-22");
-        Project outdoorLights = new Project("Outdoor Motion Lighting", "Helge Svingen", address, 25, startDate, endDate);
+        motionLightProject = new Project("Outdoor Motion Lighting", "Helge Svingen", address, 25, startDate, endDate);
 
         // Outdoor Motion Lighting Project - Workers
         electrician.setHoursWorked(25);
@@ -74,8 +78,8 @@ public class ContractorTest {
         workerList = new ArrayList<>();
         workerList.add(electrician);
         workerList.add(plumber);
-        outdoorLights.setWorkerList(workerList);
-        outdoorLights.setOverhead(25);
+        motionLightProject.setWorkerList(workerList);
+        motionLightProject.setOverhead(25);
         /* OUTDOOR PROJECT END */
 
 
@@ -85,8 +89,20 @@ public class ContractorTest {
         houseProject.printWorkerReport();
 
         // See detailed project / worker report of Outdoor Motion Lighting Project
-        outdoorLights.printProjectReport();
-        outdoorLights.printWorkerReport();
+        motionLightProject.printProjectReport();
+        motionLightProject.printWorkerReport();
         /* REPORTS END */
+
+    
+
+        // Project start comparison
+        if(houseProject.startDate.compareTo(motionLightProject.startDate) > 0) {
+            System.out.println("compareTo: HouseProject starts before Outdoor Motion Lighting project");
+        }
+
+        // Check if project is before another project
+        if(houseProject.isBefore(motionLightProject.startDate)) {
+            System.out.println("isBefore: HouseProject is before Outdoor Motion Lighting Project");
+        }
     }
 }
