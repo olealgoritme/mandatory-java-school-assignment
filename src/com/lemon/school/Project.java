@@ -3,7 +3,7 @@ package com.lemon.school;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Project implements Comparable {
+public class Project implements Comparable<Project> {
 
     private String projectName;
     private String customer;
@@ -83,7 +83,7 @@ public class Project implements Comparable {
                             + "\nWorker wage: " + "( Calculation: " + worker.hoursWorked + " * " + worker.hourlyRate + " = " + (worker.hoursWorked * worker.hourlyRate) + "kr )"
                             + "\nTotal worker cost: " + worker.calculatePay() + "kr");
         }
-
+        System.out.println("\nTotal cost for all workers: " + this.getTotalCost() + "kr");
         System.out.println("======================== WORKER REPORT END ========================");
     }
 
@@ -98,13 +98,18 @@ public class Project implements Comparable {
                         + "\nTotal project cost: "
                         + this.calculateProjectCosts() + " kr"
         );
-
         System.out.println("======================== PROJECT REPORT END ========================");
     }
 
+    
     @Override
-    public int compareTo(Object o) {
+    public int compareTo(Project p) {
+        return this.startDate(p.startDate);
+    }
 
-        return 0;
+    // Not exactly a useful return type, so adding another public
+    // function that makes more sense.
+    public boolean isBefore(LocalDate startDate, LocalDate end) {
+        return startDate.isBefore(endDate);
     }
 }

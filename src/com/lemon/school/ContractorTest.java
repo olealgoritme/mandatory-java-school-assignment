@@ -2,22 +2,25 @@ package com.lemon.school;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import com.lemon.school.*;
+
 
 public class ContractorTest {
 
-    // Workers
+    // Worker variables
     private static ArrayList<Worker> workerList;
     private static Electrician electrician;
     private static Plumber plumber;
     private static Carpenter carpenter;
 
-    // Reusable address pointer
+    // Address/date variables
     private static Address address;
+    private static LocalDate startDate;
+    private static LocalDate endDate;
 
     public static void main(String[] args) {
 
         /* WORKERS START */
-
         // Electrician
         address = new Address ("Electro road 11", "Krakow", "Krakow State", "341421");
         electrician = new Electrician("Pazko", "Plama", address, 50, 0, 220);
@@ -28,17 +31,15 @@ public class ContractorTest {
 
         address = new Address ("Plumber road 17", "Apartment 502, 2nd floor", "Krakow", "Krakow State", "3414121");
         carpenter = new Carpenter("Mitza", "Lumpa", address, 52, 0, 230);
-
         /* WORKERS END */
 
 
 
         /* HOUSING PROJECT START */
-
         // Housing Project details
         address = new Address("Veiveien 1", "Oslo", "Oslo", "0352");
-        LocalDate startDate = LocalDate.parse("2019-05-03");
-        LocalDate endDate = LocalDate.parse("2020-11-03");
+        startDate = LocalDate.parse("2019-05-03");
+        endDate = LocalDate.parse("2019-11-03");
         Project houseProject = new Project("House Project", "Jens Hansen", address, 18, startDate, endDate);
 
         // Housing Project - Workers
@@ -54,17 +55,15 @@ public class ContractorTest {
         workerList.add(plumber);
         workerList.add(carpenter);
         houseProject.setWorkerList(workerList);
-
         /* HOUSING PROJECT END */
 
 
-
         /* OUTDOOR PROJECT START */
-
         // Outdoor Motion Lighting Project - Details
         address = new Address("Snurresprettgata 141", "Oslo", "Oslo", "0141");
-        Project outdoorLights = new Project("Outdoor Motion Lighting", "Helge Svingen", address);
-
+        startDate = LocalDate.parse("2019-11-11");
+        endDate = LocalDate.parse("2019-12-22");
+        Project outdoorLights = new Project("Outdoor Motion Lighting", "Helge Svingen", address, 25, startDate, endDate);
 
         // Outdoor Motion Lighting Project - Workers
         electrician.setHoursWorked(25);
@@ -77,13 +76,10 @@ public class ContractorTest {
         workerList.add(plumber);
         outdoorLights.setWorkerList(workerList);
         outdoorLights.setOverhead(25);
-
         /* OUTDOOR PROJECT END */
 
 
-
         /* REPORTS START */
-
         // See detailed project / worker report for Housing Project
         houseProject.printProjectReport();
         houseProject.printWorkerReport();
@@ -91,7 +87,6 @@ public class ContractorTest {
         // See detailed project / worker report of Outdoor Motion Lighting Project
         outdoorLights.printProjectReport();
         outdoorLights.printWorkerReport();
-
         /* REPORTS END */
     }
 }
