@@ -7,22 +7,24 @@ import com.lemon.school.*;
 
 public class ContractorTest {
 
-    // Worker variables
-    private static ArrayList<Worker> workerList;
-    private static Electrician electrician;
-    private static Plumber plumber;
-    private static Carpenter carpenter;
-
-    // Address/date variables
-    private static Address address;
-    private static LocalDate startDate;
-    private static LocalDate endDate;
-
-    // Projects
-    private static Project houseProject;
-    private static Project motionLightProject;
 
     public static void main(String[] args) {
+
+        // Worker variables
+        ArrayList<Worker> workerList;
+        Electrician electrician;
+        Plumber plumber;
+        Carpenter carpenter;
+
+        // Address/date variables
+        Address address;
+        LocalDate startDate;
+        LocalDate endDate;
+
+        // Projects
+        ArrayList<Project> projects = new ArrayList<>();
+        Project houseProject;
+        Project motionLightProject;
 
         /* WORKERS START */
         // Electrician
@@ -59,6 +61,10 @@ public class ContractorTest {
         workerList.add(plumber);
         workerList.add(carpenter);
         houseProject.setWorkerList(workerList);
+
+        /* PRINT REPORT */
+        // See detailed project / worker report for Housing Project
+        houseProject.printProjectReport();
         /* HOUSING PROJECT END */
 
 
@@ -75,34 +81,22 @@ public class ContractorTest {
         plumber.setHoursWorked(5);
         plumber.setPlumbingCosts(4500);
 
+        // Outdoor Motion Lighting Project - Worker list
         workerList = new ArrayList<>();
         workerList.add(electrician);
         workerList.add(plumber);
         motionLightProject.setWorkerList(workerList);
         motionLightProject.setOverhead(25);
-        /* OUTDOOR PROJECT END */
 
-
-        /* REPORTS START */
-        // See detailed project / worker report for Housing Project
-        houseProject.printProjectReport();
-        houseProject.printWorkerReport();
-
+        /* PRINT REPORT */
         // See detailed project / worker report of Outdoor Motion Lighting Project
         motionLightProject.printProjectReport();
-        motionLightProject.printWorkerReport();
-        /* REPORTS END */
 
-    
 
         // Project start comparison
-        if(houseProject.startDate.compareTo(motionLightProject.startDate) > 0) {
+        if(houseProject.getStartDate().compareTo(motionLightProject.getStartDate()) > 0) {
             System.out.println("compareTo: HouseProject starts before Outdoor Motion Lighting project");
         }
 
-        // Check if project is before another project
-        if(houseProject.isBefore(motionLightProject.startDate)) {
-            System.out.println("isBefore: HouseProject is before Outdoor Motion Lighting Project");
-        }
     }
 }

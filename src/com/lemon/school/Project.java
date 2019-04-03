@@ -37,6 +37,22 @@ public class Project implements Comparable<Project> {
         this.workerList = workerList;
     }
 
+    public LocalDate getStartDate() {
+        return this.startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return this.endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
     public String getName() {
         return this.projectName;
     }
@@ -54,11 +70,11 @@ public class Project implements Comparable<Project> {
     }
 
     public double getTotalCost() {
-        totalCost = 0;
-        for (Worker worker : workerList) {
-            totalCost += worker.calculatePay();
+        this.totalCost = 0;
+        for (Worker worker : this.getWorkerList()) {
+            this.totalCost += worker.calculatePay();
         }
-        return totalCost;
+        return this.totalCost;
     }
 
     public void setOverhead(double overheadPercent) {
@@ -66,39 +82,39 @@ public class Project implements Comparable<Project> {
     }
 
     public double calculateProjectCosts() {
-        projectCosts = 0;
-        projectCosts = getTotalCost();
-        projectCosts += (projectCosts / 100 * overheadPercent) + projectCosts;
-        return projectCosts;
+        this.projectCosts = 0;
+        this.projectCosts = this.getTotalCost();
+        this.projectCosts += (this.projectCosts / 100 * this.getOverhead());
+        return this.projectCosts;
     }
 
-    public void printWorkerReport() {
-        System.out.println("\n======================== WORKER REPORT ========================");
-        for(Worker worker: this.workerList) {
-            System.out.println(
-                    "Worker: " + worker.firstName + " " + worker.lastName + " (ID: " + worker.idNumber + ")"
-                            + "\nHours worked: " + worker.hoursWorked + " hours"
-                            + "\nHourly rate: " + worker.hourlyRate + " kr"
-                            + "\nMaterials: " + (worker.calculatePay() - (worker.hoursWorked * worker.hourlyRate))
-                            + "\nWorker wage: " + "( Calculation: " + worker.hoursWorked + " * " + worker.hourlyRate + " = " + (worker.hoursWorked * worker.hourlyRate) + "kr )"
-                            + "\nTotal worker cost: " + worker.calculatePay() + "kr");
-        }
-        System.out.println("\nTotal cost for all workers: " + this.getTotalCost() + "kr");
-        System.out.println("======================== WORKER REPORT END ========================");
-    }
 
     public void printProjectReport() {
-        System.out.println("\n======================== PROJECT REPORT ========================");
+        System.out.println("=============================================== PROJECT REPORT START ===============================================");
         System.out.println(
-                "Project: "
-                        + this.projectName
-                        + "\nCustomer: " + this.customer
-                        + "\nAddress: " + this.projectAddress.getStreet1()
-                        + ", " + this.projectAddress.getZip() + " " + this.projectAddress.getCity()
-                        + "\nTotal project cost: "
-                        + this.calculateProjectCosts() + " kr"
+                "Project Name: "
+                        + this.getName()
+                        + "\nCustomer: " + this.getCustomer()
+                        + "\nAddress: " + this.getProjectAddress().getStreet1()
+                        + ", " + this.getProjectAddress().getZip() + " " + this.getProjectAddress().getCity()
+                        + "\nTotal project price: " + this.calculateProjectCosts()
+                        + " kr\n--------------------------------------------------------------------------------------------------------"
         );
-        System.out.println("======================== PROJECT REPORT END ========================");
+
+        for(Worker worker: this.workerList) {
+            System.out.println(
+                    "[Worker: " + worker.getFirstName() + " " + worker.getLastName()+ " (ID: " + worker.getIdNumber()+ ")"
+                            + " Hours worked: " + worker.getHoursWorked() + " hours"
+                            + " | Rate: " + worker.getHourlyRate() + " kr"
+                            + " | Materials: " + worker.getMaterialCost() + " kr"
+                            + " | Wage: " + "(Calculation: " + worker.getHoursWorked() + " * " + worker.getHourlyRate() + " = " + (worker.getHoursWorked() * worker.getHourlyRate()) + "kr)"
+                            + " | Total worker cost: " + worker.calculatePay() + "kr ]");
+        }
+        System.out.println("--------------------------------------------------------------------------------------------------------"
+                            + "\nTotal cost for workers: " + this.getTotalCost() + "kr"
+                            + "\nTotal Profit (" + this.getOverhead() +"%): " + ( this.calculateProjectCosts() - this.getTotalCost()) + "kr");
+
+        System.out.println("================================================ PROJECT REPORT END ================================================\n\n\n");
     }
 
     
@@ -107,9 +123,4 @@ public class Project implements Comparable<Project> {
         return this.startDate.compareTo(p.startDate);
     }
 
-    // Not exactly a useful return type, so adding another public
-    // function that makes more sense.
-    public boolean isBefore(Project p) {
-        return this.startDate.compareTo(p.endDate);
-    }
 }

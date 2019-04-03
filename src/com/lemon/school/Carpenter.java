@@ -2,15 +2,19 @@ package com.lemon.school;
 
 public class Carpenter extends Worker {
 
-    private double lumberCosts;
-
 
     public Carpenter(String firstName, String lastName, Address address, int idNumber, double hoursWorked, double hourlyRate) {
         super(firstName, lastName, address, idNumber, hoursWorked, hourlyRate);
     }
 
+
+    @Override
+    public double getMaterialCost() {
+        return super.getMaterialCost();
+    }
+
     public void setLumberCosts(double lumberCosts) {
-        this.lumberCosts = lumberCosts;
+        super.setMaterialCost(lumberCosts);
     }
 
     public String doWork() {
@@ -18,7 +22,7 @@ public class Carpenter extends Worker {
     }
 
     public double calculatePay() {
-        return super.calculatePay() + lumberCosts;
+        return super.calculatePay() + super.getMaterialCost();
     }
 
     @Override
