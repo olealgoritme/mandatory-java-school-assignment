@@ -120,7 +120,7 @@ public class Project implements Comparable<Project> {
     
     @Override
     public int compareTo(Project p) {
-        return this.startDate.compareTo(p.startDate);
+        return this.getStartDate().compareTo(p.getStartDate());
     }
 
 }

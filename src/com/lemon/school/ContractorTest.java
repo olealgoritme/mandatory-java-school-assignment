@@ -94,8 +94,10 @@ public class ContractorTest {
 
 
         // Project start comparison
-        if(houseProject.getStartDate().compareTo(motionLightProject.getStartDate()) > 0) {
-            System.out.println("compareTo: HouseProject starts before Outdoor Motion Lighting project");
+        if(houseProject.getStartDate().compareTo(motionLightProject.getStartDate()) < 0) {
+            System.out.println("compareTo: HouseProject START BEFORE Outdoor Motion Lighting project");
+        } else {
+            System.out.println("compareTo: HouseProject STARTS AFTER Outdoor Motion Lighting project");
         }
 
     }
