@@ -22,7 +22,6 @@ public class ContractorTest {
         LocalDate endDate;
 
         // Projects
-        ArrayList<Project> projects = new ArrayList<>();
         Project houseProject;
         Project motionLightProject;
 
